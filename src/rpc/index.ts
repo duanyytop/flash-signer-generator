@@ -1,6 +1,6 @@
 import CKB from '@nervosnetwork/ckb-sdk-core'
 import { rawTransactionToHash } from '@nervosnetwork/ckb-sdk-utils'
-import { rsaKey, rsaLockScript, RSA_PRIVATE_KEY, secp256k1Dep, secp256k1LockScript } from '../account'
+import { rsaKey, rsaLockScript, secp256k1Dep, secp256k1LockScript } from '../account'
 import { collectInputs, getCells } from '../collector'
 import { FEE, FlashSignerLockDep } from '../constants/script'
 import { CKB_NODE_RPC, SECP256K1_PRIVATE_KEY } from '../utils/config'
