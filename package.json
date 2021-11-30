@@ -16,10 +16,12 @@
     "@nervosnetwork/ckb-sdk-rpc": "^0.101.0",
     "@nervosnetwork/ckb-sdk-utils": "^0.101.0",
     "camelcase-keys": "^7.0.0",
-    "node-fetch": "^2.6.1"
+    "node-fetch": "^2.6.1",
+    "node-rsa": "^1.1.1"
   },
   "devDependencies": {
     "@types/node": "^16.4.13",
+    "@types/node-rsa": "^1.1.1",
     "babel-eslint": "^10.1.0",
     "dotenv": "^8.2.0",
     "eslint": "^7.27.0",
