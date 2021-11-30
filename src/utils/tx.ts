@@ -1,8 +1,14 @@
-import { hexToBytes, PERSONAL, rawTransactionToHash, serializeWitnessArgs, toUint64Le } from "@nervosnetwork/ckb-sdk-utils";
-import blake2b from "@nervosnetwork/ckb-sdk-utils/lib/crypto/blake2b";
-import NodeRSA from "node-rsa";
-import { rsaPubKey } from "../account";
-import { remove0x } from "./hex";
+import {
+  hexToBytes,
+  PERSONAL,
+  rawTransactionToHash,
+  serializeWitnessArgs,
+  toUint64Le,
+} from '@nervosnetwork/ckb-sdk-utils'
+import blake2b from '@nervosnetwork/ckb-sdk-utils/lib/crypto/blake2b'
+import NodeRSA from 'node-rsa'
+import { rsaPubKey } from '../account'
+import { remove0x } from './hex'
 
 export const signTransaction = async (key: NodeRSA, transaction: CKBComponents.RawTransactionToSign) => {
   if (!key) throw new Error('Private key or address object')
@@ -19,9 +25,9 @@ export const signTransaction = async (key: NodeRSA, transaction: CKBComponents.R
   const transactionHash = rawTransactionToHash(transaction)
 
   // len(smt_type + pub_key_e + pub_key_n + signature)
-  const lock_length = 2 + 8 + key.getKeySize() / 4 * 2
+  const lock_length = 2 + 8 + (key.getKeySize() / 4) * 2
 
-  console.log("lock length", lock_length)
+  console.log('lock length', lock_length)
 
   const emptyWitness = {
     ...witnessGroup[0],
@@ -44,9 +50,9 @@ export const signTransaction = async (key: NodeRSA, transaction: CKBComponents.R
 
   const message = `0x${hash.digest('hex')}`
   if (key.getKeySize() !== 2048 && key.getKeySize() !== 4096) {
-    throw new Error("RSA key size error")
+    throw new Error('RSA key size error')
   }
-  const rsaType = key.getKeySize() === 2048 ? "01" : "02"
+  const rsaType = key.getKeySize() === 2048 ? '01' : '02'
   const pubKey = remove0x(await rsaPubKey())
   emptyWitness.lock = `0x${rsaType}${pubKey}${signMessage(key, message)}`
 
@@ -56,11 +62,8 @@ export const signTransaction = async (key: NodeRSA, transaction: CKBComponents.R
 
   return {
     ...transaction,
-    witnesses: signedWitnesses.map(witness =>
-      typeof witness === 'string' ? witness : serializeWitnessArgs(witness)
-    )
+    witnesses: signedWitnesses.map(witness => (typeof witness === 'string' ? witness : serializeWitnessArgs(witness))),
   }
-
 }
 
 export const signMessage = (key: NodeRSA, message: Hex) => {

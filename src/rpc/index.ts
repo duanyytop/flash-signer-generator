@@ -10,9 +10,7 @@ const RSA_CELL_CAPACITY = BigInt(500) * BigInt(100000000)
 const SECP256K1_CELL_CAPACITY = BigInt(200) * BigInt(100000000)
 const ckb = new CKB(CKB_NODE_RPC)
 
-const generateRSAOutputs = async (
-  inputCapacity: bigint,
-) => {
+const generateRSAOutputs = async (inputCapacity: bigint) => {
   const secp256k1Lock = await secp256k1LockScript()
   const rsaLock = await rsaLockScript()
   let outputs: CKBComponents.CellOutput[] = [
@@ -52,9 +50,7 @@ export const sendCapacityToRsaLock = async () => {
   return txHash
 }
 
-const generateSecp256k1Outputs = async (
-  inputCapacity: bigint,
-) => {
+const generateSecp256k1Outputs = async (inputCapacity: bigint) => {
   const secp256k1Lock = await secp256k1LockScript()
   const rsaLock = await rsaLockScript()
   let outputs: CKBComponents.CellOutput[] = [

@@ -9,4 +9,3 @@ export const FlashSignerLockDep: CKBComponents.CellDep = {
   outPoint: { txHash: '0xb66776ff3244033fcd15312ae8b17d384c11bebbb923fce3bd896d89f4744d48', index: '0x0' },
   depType: 'depGroup',
 }
-

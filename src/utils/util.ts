@@ -25,7 +25,11 @@ export const pemToKey = (privateKeyPem: string): NodeRSA => {
 export const exportPubKey = async (privateKey: NodeRSA) => {
   const data: NodeRSA.KeyComponentsPublic = await privateKey.exportKey('components-private')
 
-  const e = (data.e as number).toString(16).padStart(8, '0')
+  if (typeof data.e !== 'number') {
+    throw Error('RSA public key e error')
+  }
+  const pubKeyE: number = data.e
+  const e = pubKeyE.toString(16).padStart(8, '0')
   const n = data.n.slice(1)
 
   const eBuffer = Buffer.from(e, 'hex').reverse()
@@ -34,6 +38,5 @@ export const exportPubKey = async (privateKey: NodeRSA) => {
   const pubKey = Buffer.concat([eBuffer, nBuffer])
   return `0x${pubKey.toString('hex')}`
 }
-
 
 export default toCamelcase
