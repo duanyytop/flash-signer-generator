@@ -8,6 +8,7 @@
   "license": "MIT",
   "scripts": {
     "start": "ts-node src/index.ts",
+    "rsa": "ts-node src/rsa-test.ts",
     "build": "tsc -p .",
     "lint": "eslint src/**/*.ts --fix",
     "prepare": "husky install"
